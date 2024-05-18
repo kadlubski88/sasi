@@ -19,7 +19,6 @@ void SASI::step() {
         switch(state) {
             case START_STATE: {//begin of message
                 //function byte
-                error = NO_ERROR;
                 if(received_byte == 'W' || received_byte == 'w') {
                     state = W_READ_ADDRESS_1;
                 }
@@ -176,8 +175,8 @@ void int_to_hex(uint16_t input, char output[]) {
         input /= 0x10;
     }
 }
-void send_error(uin8_t error_code) {
+void send_error(uint8_t error_code) {
     Serial.print("X");
-    Serial.print(error);
+    Serial.print(error_code);
     Serial.print("\n");
 }

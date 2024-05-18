@@ -26,8 +26,8 @@
 
 
 uint8_t hex_to_int(uint8_t hex_char);
-void int_to_hex(uint16_t input, char output[])
-void send_error(uin8_t error_code);
+void int_to_hex(uint16_t input, char output[]);
+void send_error(uint8_t error_code);
 
 class SASI {
     public:
