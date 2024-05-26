@@ -4,8 +4,11 @@
 
 #include "Arduino.h"
 
+// amount of registers
 #define LENGTH_REG 256
-#define ERROR_STATE 999
+
+// states
+#define ERROR_STATE 255
 #define WAIT_STATE 99
 #define START_STATE 1
 #define W_READ_ADDRESS_1 10
@@ -17,6 +20,7 @@
 #define READ_DATA_4 16
 #define R_READ_ADDRESS_1 20
 #define R_READ_ADDRESS_2 21
+
 // Error types
 #define NO_ERROR 0
 #define NO_HEX_PARAMETER 1
@@ -24,10 +28,11 @@
 #define WRONG_DELIMITER 3
 #define NOT_IMPLEMENTED_YET 4
 
-
+// Function prototypes
 uint8_t hex_to_int(uint8_t hex_char);
-void int_to_hex(uint16_t input, char output[]);
-void send_error(uint8_t error_code);
+void int_to_hex(uint16_t input, char output[], uint8_t output_length);
+void send_error(uint8_t error_code, char output_frame[]);
+void send_read_response(char address[], char data[], char output_frame[]);
 
 class SASI {
     public:
@@ -43,6 +48,8 @@ class SASI {
         uint16_t data_register[LENGTH_REG];
         char data_output[4];
         char address_output[2];
+        char error_response[3] = {'X', '0', '\n'};
+        char read_response[9] = {'R', '0', '0', 'V', '0', '0', '0', '0', '\n'};
 };
 
 #endif
